@@ -106,14 +106,6 @@
   {
     "similar": "\"\"",
     "previous": "\"\"",
-    "english": "Alice visits her grandmother every Sunday afternoon.",
-    "pln_types": "(: Name (-> (: $name Object) String Type))\r\n(: NameOf (-> (: $named Object) (: $name Object) Type))\r\n(: GrandmotherOf (-> (: $grandmother Object) (: $grandchild Object) Type))\r\n(: Visits (-> (: $visitor Object) (: $visited Object) Type))\r\n(: Sunday (-> (: $day Object) Type))\r\n(: Afternoon (-> (: $day Object) Type))\r\n(: On (-> (: $pred (-> (: $sub Object) (: $obj Object) Type)) (: $day Object) Type))",
-    "pln_statements": "(: n_is_name (WithTV (Name n \"Alice\") (STV 0.95 0.9)))\r\n(: alice_named_n (WithTV (NameOf alice n) (STV 0.95 0.9)))\r\n(: alice_grandmother (WithTV (GrandmotherOf grandmother alice) (STV 0.95 0.9)))\r\n(: alice_visits_grandmother_sunday_afternoon (Implication ((& Sunday Afternoon) $sa) (On (Visits alice grandmother) $sa) (STV 0.95 0.9)))",
-    "pln_queries": ""
-  },
-  {
-    "similar": "\"\"",
-    "previous": "\"\"",
     "english": "Is an apple a fruit?",
     "pln_types": "(: Apple (-> (: $apple Object) Type))\r\n(: Fruit (-> (: $fruit Object) Type))",
     "pln_statements": "",
@@ -194,14 +186,6 @@
   {
     "similar": "\"\"",
     "previous": "\"\"",
-    "english": "This ball is bright Red.",
-    "pln_types": "(: Ball (-> (: $ball Object) Type))\r\n(: Red (-> (: $red Object) Type))\r\n(: Bright (-> (: $bright Object) Type))",
-    "pln_statements": "(: b_Ball (Ball b))\r\n(: b_BrightRed ((& Bright Red) b))",
-    "pln_queries": ""
-  },
-  {
-    "similar": "\"\"",
-    "previous": "\"\"",
     "english": "Are Humans Animals?",
     "pln_types": "(: Human (-> (: $human Object) Type))\r\n(: Animal (-> (: $animal Object) Type))",
     "pln_statements": "",
@@ -228,7 +212,7 @@
     "previous": "\"\"",
     "english": "There exists a Black Dog.",
     "pln_types": "(: Dog (-> (: $dog Object) Type))\r\n(: Black (-> (: $black Object) Type))\r\n",
-    "pln_statements": "(: d_Dog (WithTV (Dog d) (STV 1 0.9))\r\n(: d_Black (WithTV (Black b) (STV 1 0.9))",
+    "pln_statements": "(: d_Dog (WithTV (Dog d) (STV 1 0.9))\r\n(: d_Black (WithTV (Black d) (STV 1 0.9))",
     "pln_queries": ""
   },
   {
@@ -236,7 +220,111 @@
     "previous": "\"\"",
     "english": "Most dogs chase some cat.",
     "pln_types": "(: Dog (-> (: $dog Object) Type))\r\n(: Cat (-> (: $cat Object) Type))\r\n(: Chase (-> (: $chaser Object) (: $chased Object) Type))",
-    "pln_statements": "(: most_dogs_chase_some_cat (WithTV (Implication (Dog $d) (And (Cat $d) (Chase $d $c))) (STV 0.8 0.8)))",
+    "pln_statements": "(: most_dogs_chase_some_cat (WithTV (Implication (Dog $d) (And (Cat $c) (Chase $d $c))) (STV 0.8 0.8)))",
+    "pln_queries": ""
+  },
+  {
+    "similar": "\"\"",
+    "previous": "\"\"",
+    "english": "The temple is in Kathmandu.",
+    "pln_types": "(: Name (-> (: $name Object) String Type))\r\n(: NameOf (-> (: $named Object) (: $name Object) Type))\r\n(: Temple (-> (: $temple Object) Type))",
+    "pln_statements": "(: t_is_the_temple (WithTV (Temple t) (STV 0.95 0.9)))\r\n(: nk_is_name (WithTV (Name nk \"Kathmandu\") (STV 0.95 0.9)))\r\n(: k_named_nk (WithTV (NameOf k nk) (STV 0.95 0.9)))\r\n(: t_location (WithTV (LocationOf t k) (STV 0.95 0.9)))",
+    "pln_queries": ""
+  },
+  {
+    "similar": "\"\"",
+    "previous": "\"\"",
+    "english": "Philip said that some humans can fly in the Dragon Ball anime.",
+    "pln_types": "(: Name (-> (: $name Object) String Type))\r\n(: NameOf (-> (: $named Object) (: $name Object) Type))\r\n(: Said (-> (: $person Object) Type))\r\n(: Human (-> (: $human Object) Type))\r\n(: Can (-> (-> (: $obj Object) Type) Type))\r\n(: Fly (-> (: $flyer Object) Type))\r\n(: Anime (-> (: $anime Object) Type))",
+    "pln_statements": "(: np_is_name (WithTV (Name np \"Philip\") (STV 0.95 0.9)))\r\n(: philip_named_np (WithTV (NameOf philip np) (STV 0.95 0.9)))\r\n(: anime_is_the_anime (WithTV (Anime anime) (STV 0.95 0.9))\r\n(: ndb_is_name (WithTV (Name ndb \"Dragon Ball\") (STV 0.95 0.9)))\r\n(: anime_named_ndb (WithTV (NameOf anime ndb) (STV 0.95 0.9)))\r\n(: human_fly_anime (WithTV (Said philip (Context anime (Implication (Human $x) (Can (Fly $x))))) (STV 0.95 0.9)))",
+    "pln_queries": ""
+  },
+  {
+    "similar": "\"\"",
+    "previous": "\"\"",
+    "english": "Jack said, \"I am leaving.\"",
+    "pln_types": "(: Name (-> (: $name Object) String Type))\r\n(: NameOf (-> (: $named Object) (: $name Object) Type))\r\n(: Said (-> (: $someone Object) (: $said Type) Type))\r\n(: Leaving (-> (: $person Object) Type))",
+    "pln_statements": "(: nj_is_name (WithTV (Name nj \"Jack\") (STV 0.95 0.9)))\r\n(: jack_named_nj (WithTV (NameOf jack nj) (STV 0.95 0.9)))\r\n(: jack_leaving (WithTV (Said jack (Leaving jack) (STV 0.95 0.9))))",
+    "pln_queries": ""
+  },
+  {
+    "similar": "\"\"",
+    "previous": "\"\"",
+    "english": "May the 4th is the Star Wars Day.",
+    "pln_types": "(: Name (-> (: $name Object) String Type))\r\n(: NameOf (-> (: $named Object) (: $name Object) Type))\r\n(: Date (-> (: $date Object) Type))\r\n(: Month (-> (: $month Object) String Type))\r\n(: Day (-> (: $day Object) String Type))",
+    "pln_statements": "(: may_4th_star_wars_day (WithTV (Implication (And (Date $d) (And (Month $d \"May\") (Day $d \"4\"))) (And (Name $n \"Star Wars Day\") (NameOf $d $n))) (STV 0.95 0.9)))",
+    "pln_queries": ""
+  },
+  {
+    "similar": "\"\"",
+    "previous": "\"\"",
+    "english": "Nearly all experts agree that about half of the research findings apply to most real-world situations.",
+    "pln_types": "(: Expert (-> (: $expert Object) Type))\r\n(: Agree (-> (: $agreer Object) (: $agreed Type) Type))\r\n(: Research (-> (: $research Object) Type))\r\n(: Finding (-> (: $finding Object) Type))\r\n(: ApplyTo (-> (: $applier Object) (: $applied Object) Type))\r\n(: Apply (-> (: $applier Object) Type))\r\n(: To (-> (: $act Type) Type))\r\n(: RealWorld (-> (: $realworld Object) Type))\r\n(: Situation (-> (: $situation Object) Type))",
+    "pln_statements": "(: expert_finding_situation (WithTV (Implication (Expert $e) (Agree $e (Implication (And ((& Research Finding) $f) ((& RealWorld Situation) $rws)) (ApplyTo $rf $rws)))) (STV 0.5 0.9)))",
+    "pln_queries": ""
+  },
+  {
+    "similar": "\"\"",
+    "previous": "\"\"",
+    "english": "The book that Roy read is engaging.",
+    "pln_types": "(: Book (-> (: $book Object) Type))\r\n(: Name (-> (: $name Object) String Type))\r\n(: NameOf (-> (: $named Object) (: $name Object) Type))\r\n(: Read (-> (: $reader Object) (: $read Object) Type))\r\n(: Engaging (-> (: $obj Object) Type))",
+    "pln_statements": "(: b_is_the_book (WithTV (Book b) (STV 0.95 0.9)))\r\n(: nr_is_name (WithTV (Name nr \"Roy\") (STV 0.95 0.9)))\r\n(: r_named_nr (WithTV (NameOf r nr) (STV 0.95 0.9)))\r\n(: b_engaging (WithTV (And (Read r b) (Engaging b)) (STV 0.95 0.9)))",
+    "pln_queries": ""
+  },
+  {
+    "similar": "\"\"",
+    "previous": "\"\"",
+    "english": "Paul plays guitar, and Kitty too.",
+    "pln_types": "(: Name (-> (: $name Object) String Type))\r\n(: NameOf (-> (: $named Object) (: $name Object) Type))\r\n(: Plays (-> (: $player Object) (: $played Object) Type))\r\n(: Guiter (-> (: $guiter Object) Type))",
+    "pln_statements": "(: np_is_name (WithTV (Name np \"Paul\") (STV 0.95 0.9)))\r\n(: nk_is_name (WithTV (Name nk \"Kitty\") (STV 0.95 0.9)))\r\n(: p_named_np (WithTV (NameOf p np) (STV 0.95 0.9)))\r\n(: k_named_nk (WithTV (NameOf k nk) (STV 0.95 0.9)))\r\n(: p_play_guiter (WithTV (And (Guiter $g) (Plays p $g)) (STV 0.95 0.9)))\r\n(: k_play_guiter (WithTV (And (Guiter $g) (Plays k $g)) (STV 0.95 0.9)))",
+    "pln_queries": ""
+  },
+  {
+    "similar": "\"\"",
+    "previous": "The chair is new.\r\n\r\n(: Chair (-> (: $chair Object) Type))\r\n(: New (-> (: $new_obj Object) Type))\r\n\r\n(: c_is_the_chair (WithTV (Chair c) (STV 0.95 0.9)))\r\n(: c_is_new (WithTV (New c) (STV 0.95 0.9)))",
+    "english": "It is red, and she likes it.",
+    "pln_types": "(: Red (-> (: $red_obj Object) Type))\r\n(: Likes (-> (: $liker Object) (: $liked Object) Type))",
+    "pln_statements": "(: c_is_red (WithTV (Red c) (STV 0.95 0.9)))\r\n(: s_is_she (WithTV (She s) (STV 0.95 0.9)))   ;; Unresolved she\r\n(: s_likes_c (WithTV (Likes s c) (STV 0.95 0.9)))",
+    "pln_queries": ""
+  },
+  {
+    "similar": "\"\"",
+    "previous": "Anna and Keith like hiking.\r\n\r\n(: Name (-> (: $name Object) String Type))\r\n(: NameOf (-> (: $named Object) (: $name Object) Type))\r\n(: Like (-> (: $liker Object) (: $liked Object) Type))\r\n(: Hiking (-> (: $hike Object) Type))\r\n\r\n(: na_is_name (WithTV (Name na \"Anna\") (STV 0.95 0.9)))\r\n(: nk_is_name (WithTV (Name nk \"Keith\") (STV 0.95 0.9)))\r\n(: anna_named_na (WithTV (NameOf anna na) (STV 0.95 0.9)))\r\n(: keith_named_nk (WithTV (NameOf keith nk) (STV 0.95 0.9)))\r\n(: h_is_hiking (WithTV (Hiking h) (STV 0.95 0.9)))\r\n(: a_like_h (WithTV (Like a h) (STV 0.95 0.9)))\r\n(: k_like_h (WithTV (Like k h) (STV 0.95 0.9)))",
+    "english": "They go hiking together all the time.",
+    "pln_types": "(: They (-> (: $they Object) Type))\r\n(: GoHiking (-> (: $hiker Object) Type))\r\n(: Together (-> (: $tgt Object) Type))\r\n(: Go (-> (: $goer Object) (: $gone Object) Type))",
+    "pln_statements": "(: t_is_they (WithTV (They t) (STV 0.95 0.9)))\r\n(: a_belongsto_t (WithTV (BelongsTo a t) (STV 0.95 0.9)))\r\n(: k_belongsto_t (WithTV (BelongsTo k t) (STV 0.95 0.9)))\r\n(: ak_gohike_all_time (WithTV ((& Together GoHiking) t) (STV 0.9 0.9)))\r\n\r\n;; Unpack meanings / alternative representations\r\n(: gohiking_means (WithTV (Implication (GoHiking $x) (And (Hiking $h) (Go $x $h))) (STV 0.95 0.9)))\r\n(: together_means (WithTV (Implication ((& Together $act) $ppl) (And (BelongsTo $x $ppl) (And (AtTime ($act $x) $time) (LocationOf ($act $x) $location)))) (STV 0.95 0.9)))",
+    "pln_queries": ""
+  },
+  {
+    "similar": "\"\"",
+    "previous": "\"\"",
+    "english": "The rat the cat the man hit chased ran into the trap.",
+    "pln_types": "(: Rat (-> (: $rat Object) Type))\r\n(: Cat (-> (: $cat Object) Type))\r\n(: Man (-> (: $man Object) Type))\r\n(: Hit (-> (: $hitter Object) (: $hit Object) Type))\r\n(: Chased (-> (: $chaser Object) (: $chased Object) Type))\r\n(: RanInto (-> (: $runner Object) (: $ran Object) Type))\r\n(: Trap (-> (: $trap Object) Type))",
+    "pln_statements": "(: r_is_the_rat (WithTV (Rat r) (STV 0.95 0.9)))\r\n(: c_is_the_cat (WithTV (Cat c) (STV 0.95 0.9)))\r\n(: m_is_the_man (WithTV (Man m) (STV 0.95 0.9)))\r\n(: t_is_the_trap (WithTV (Trap t) (STV 0.95 0.9)))\r\n(: r_raninto_t (WithTV (RanInto r t) (STV 0.95 0.9)))\r\n(: c_chased_r (WithTV (Chased c r) (STV 0.95 0.9)))\r\n(: m_hit_c (WithTV (Hit m c) (STV 0.95 0.9)))\r\n\r\n;; Location info\r\n(: r_loc_t (WithTV (LocationOf r t) (STV 0.95 0.9)))",
+    "pln_queries": ""
+  },
+  {
+    "similar": "\"\"",
+    "previous": "Selly hides behind the door.\r\n\r\n(: Name (-> (: $name Object) String Type))\r\n(: NameOf (-> (: $named Object) (: $name Object) Type))\r\n(: Hides (-> (: $hider Object) (: $hid Type) Type))\r\n(: Behind (-> (: $obj Object) Type))\r\n(: Door (-> (: $door Object) Type))\r\n\r\n(: ns_is_name (WithTV (Name ns \"Selly\") (STV 0.95 0.9)))\r\n(: s_named_ns (WithTV (NameOf s ns) (STV 0.95 0.9)))\r\n(: d_is_the_door (WithTV (Door d) (STV 0.95 0.9)))\r\n(: s_hide_behind_d (WithTV (HidesBehind s d) (STV 0.95 0.9)))\r\n\r\n;; Location info\r\n(: hide_behind_means (WithTV (Implication (HidesBehind $x $y) (And (Behind $loc $y) (And (Hides $x) (LocationOf $x $loc)))) (STV 0.95 0.9)))",
+    "english": "Where is she?",
+    "pln_types": "",
+    "pln_statements": "",
+    "pln_queries": "(: $prf (WithTV (LocationOf s $where) $tv))"
+  },
+  {
+    "similar": "\"\"",
+    "previous": "\"\"",
+    "english": "I saw the man with the telescope.",
+    "pln_types": "(: I (-> (: $i Object) Type))\r\n(: Saw (-> (: $seer Object) (: $seen Object) Type))\r\n(: Man (-> (: $man Object) Type))\r\n(: With (-> (: $activity Type) (: $instrument Object) Type))\r\n(: Has (-> (: $owner Object) (: $owned Object) Type))\r\n(: Telescope (-> (: $telescope Object) Type))",
+    "pln_statements": "(: authorspeaker_is_i (WithTV (I authorSpeaker) (STV 0.95 0.9)))\r\n(: man_is_the_man (WithTV (Man man) (STV 0.95 0.9)))\r\n(: telescope_is_the_telescope (WithTV (Telescope telescope) (STV 0.95 0.9)))\r\n\r\n;; Interpretation 1\r\n(: i_saw_man_with_telescope_1 (WithTV (With (Saw authorSpeaker man) telescope) (STV 0.5 0.8)))\r\n\r\n;; Interpretation 2\r\n(: i_saw_man_with_telescope_2 (WithTV (Saw authorSpeaker man) (STV 0.5 0.8)))\r\n(: man_has_telescope (WithTV (Has man telescope) (STV 0.5 0.8)))",
+    "pln_queries": ""
+  },
+  {
+    "similar": "\"\"",
+    "previous": "Joy comes and goes like breeze.\r\n\r\n(: Joy (-> (: $joy Object) Type))\r\n(: ComesAndGoes (-> (: $obj Object) Type))\r\n(: Comes (-> (: $obj Object) Type))\r\n(: Goes (-> (: $obj Object) Type))\r\n(: Like (-> (: $obj1 Object) (: $obj2 Object) Type))\r\n(: Breeze (-> (: $breeze Object) Type))\r\n\r\n(: joy_comes_goes_breeze (WithTV (Implication (Joy $j) (And (Breeze $b) (And (ComesAndGoes $j) (Like $j $b)))) (STV 0.85 0.9)))\r\n\r\n;; Unpack meanings / alternative representations\r\n(: comesandgoes_means_1 (WithTV (Implication (ComesAndGoes $x) (And (Comes $x) (Goes $x))) (STV 0.7 0.9)))\r\n(: comesandgoes_means_2 (WithTV (Implication (ComesAndGoes $x) (Transient $x)) (STV 0.95 0.9)))",
+    "english": "Miseries stick in you like thorns - until you realize it is all your making.",
+    "pln_types": "(: Misery (-> (: $misery Object) Type))\r\n(: StickIn (-> (: $obj1 Object) (: $obj2 Object) Type))\r\n(: You (-> (: $you Object) Type))\r\n(: Like (-> (: $obj1 Object) (: $obj2 Object) Type))\r\n(: Thorn (-> (: $thorn Object) Type))\r\n(: Realize (-> (: $realizer Object) (: $realization Type) Type))\r\n(: YourMaking (-> (: $thing Object) Type))",
+    "pln_statements": "(: miseries_like_thorns (WithTV (Implication (Misery $m) (And (You $y) (And (StickIn $m $y) (And (Thorn $t) (Like $m $t))))) (STV 0.85 0.9)))\r\n(: you_realize_joy_yourmaking (WithTV (Implication (And (You $y) (And (Joy $j) (Realize $y (YourMaking $j)))) (And (Breeze $b) (And (ComesAndGoes $j) (Like $j $b)))) (STV 0 0.9)))\r\n(: you_realize_misery_yourmaking (WithTV (Implication (And (You $y) (And (Misery $m) (Realize $y (YourMaking $m)))) (And (Thorn $t) (And (StickIn $m $y) (Like $m $t)))) (STV 0 0.9)))\r\n\r\n;; Unpack meanings / alternative representations\r\n(: yourmaking_means (WithTV (Implication (YourMaking $x) (And (You $y) (Making $y $x))) (STV 0.9 0.9)))\r\n",
     "pln_queries": ""
   }
 ]
